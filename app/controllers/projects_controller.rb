@@ -7,7 +7,7 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project = Project.new(params[:project])
+    @project = Project.new(project_params)
 
     if @project.save
       flash[:notice] = "Project has been created."
@@ -16,4 +16,11 @@ class ProjectsController < ApplicationController
       # nothing, yet
     end
   end
+
+private
+
+  def project_params
+    params.require(:project).permit(:name, :description)
+  end
+
 end
